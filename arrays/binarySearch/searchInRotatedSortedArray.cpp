@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+/*
 int getPivot(int arr[], int size)
 {
     int start = 0, end = size - 1;
@@ -44,4 +45,34 @@ int main()
     {
         cout << bs(arr, 0, pivot - 1, target);
     }
+}
+
+*/
+
+// approach 2 > without pivot>,if target is less than mid and greater than arr[0] then left part is sorted or else right part is sorted;
+
+int searchRotated(int arr[], int size, int target)
+{
+    int s = 0, e = size - 1;
+    while (s <= e)
+    {
+        int mid = s + (e - s) / 2;
+        if (arr[mid] == target)
+        {
+            return mid;
+        }
+        else if (target >= arr[s] && target < arr[mid])
+            e = mid - 1;
+        else
+            s = mid + 1;
+    }
+    return -1;
+}
+
+int main()
+{
+    int size = 5;
+    int arr[size] = {3, 5, 17, 1, 2};
+    int target = 5;
+    cout << searchRotated(arr, size, target);
 }
