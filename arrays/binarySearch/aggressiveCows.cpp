@@ -47,3 +47,7 @@ int main()
 	sort(arr, arr + size);
 	cout << aggressiveCows(arr, size, cows);
 }
+
+/*
+if there is any hint of maximum of minimum or minimum of maximum then apply binary search on range
+*/
