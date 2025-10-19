@@ -26,6 +26,7 @@ Node *buildTree(Node *root)
 
     if (data == -1)
         return NULL;
+
     cout << "enter data to insert on left of " << data << endl;
 
     root->left = buildTree(root->left);
@@ -100,11 +101,48 @@ void postorder(Node *root)
     cout << root->data << " ";
 }
 
+void buildFromLevelOrder(Node *&root)
+{
+    queue<Node*> q;
+    cout << "enter data for root " << endl;
+    int data;
+    cin >> data;
+    root = new Node(data);
+    q.push(root);
+
+    while (!q.empty())
+    {
+        Node *temp = q.front();
+        q.pop();
+
+        cout << "enter data for left of " << temp->data << endl;
+        int leftdata;
+        cin >> leftdata;
+        if (leftdata != -1)
+        {
+            temp->left = new Node(leftdata);
+            q.push(temp->left);
+        }
+
+        cout << "enter data for right of " << temp->data << endl;
+        int rightdata;
+        cin >> rightdata;
+        if (rightdata != -1)
+        {
+            temp->right = new Node(rightdata);
+            q.push(temp->right);
+        }
+    }
+}
+
 int main()
 {
     Node *root = NULL;
-    root = buildTree(root);
+    buildFromLevelOrder(root);
     levelOrderTraversal(root);
+
+    /*
+    root = buildTree(root);
     // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
 
     inorder(root);
@@ -112,10 +150,11 @@ int main()
 
     preorder(root);
     cout<<endl;
-    
+
     postorder(root);
     cout<<endl;
-    
-    
+
+    */
+
     return 0;
 }
